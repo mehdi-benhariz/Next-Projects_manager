@@ -3,9 +3,9 @@ import styles from '../styles/Main.module.css'
 
 const Footer = () => {
     return ( 
-        <footer className="bg-gray-200 text-dark absolute inset-x-0 bottom-0 " >
-            this is a footer
-            <p>copy right</p>
+        <footer className="bg-gray-200 text-dark mt-10 pt-2 inset-x-0
+         bottom-0 flex items-center justify-center  fixed" >
+            this is a footer copy right : 2021 mehdi ben hariz
         </footer>
      );
 }
