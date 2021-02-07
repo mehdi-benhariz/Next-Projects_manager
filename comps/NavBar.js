@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import {useRouter} from "next/router";
+import { useState } from 'react';
+
 const NavBar = () => {
+    const [search, setsearch] = useState("");
+    const router = useRouter();
+
+    //getting the search result 
     return (
         <nav class="grid sm:grid-cols-3 sm:h-full px-4 " >
             <div className="logo">
@@ -12,8 +19,11 @@ const NavBar = () => {
             <Link href="/" class="inline-block " ><a>Main</a></Link>
             <Link href="/about" class="inline-block " ><a>About</a></Link>
             <Link href="/add" class="inline-block " ><a>Add</a></Link>
-            <input placeholder="search for a project..." />
-            <button class="border border-blue-500 p-2 rounded ">Find</button>
+            <input placeholder="search for a project..." onChange={(e)=>setsearch(e.target.value)} />
+            <button class="border border-blue-500 p-2 rounded pl-1" onClick={()=>  router.push({
+            pathname: '/',
+            query: { search: search }
+        })      } >Find</button>
             </div>
 
         </nav>

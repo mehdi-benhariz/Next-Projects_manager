@@ -1,7 +1,11 @@
 import Head from 'next/head'
 import Project  from '../comps/Project'
+import {useRouter} from "next/router"
 
 export default function Home({projects}) {
+  const router = useRouter()
+   export const {search}= router.query;
+   
   return (
     <>
    <Head>
@@ -20,7 +24,12 @@ export default function Home({projects}) {
 }
 
 export const  getStaticProps=async()=> {
-  const base_url = 'http://localhost:3001/projects';
+  import {search } from './search'
+  const base_url = `http://localhost:3001/projects?q=`;
+
+  if(search)
+     base_url+search;
+
   const res = await fetch(`${base_url}`);
   const data = await res.json()
   return {
