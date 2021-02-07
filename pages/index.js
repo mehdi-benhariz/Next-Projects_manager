@@ -20,7 +20,7 @@ export default function Home({projects}) {
 }
 
 export const  getStaticProps=async()=> {
-  const base_url = 'http://localhost:3000/projects.json';
+  const base_url = 'http://localhost:3001/projects';
   const res = await fetch(`${base_url}`);
   const data = await res.json()
   return {
