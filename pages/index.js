@@ -1,11 +1,29 @@
 import Head from 'next/head'
 import Project  from '../comps/Project'
 import {useRouter} from "next/router"
+import { useState } from 'react'
 
-export default function Home({projects}) {
+export default  function Home({projects}) {
+const [data, setdata] = useState([]);
+
   const router = useRouter()
-   export const {search}= router.query;
-   
+  const {search}= router.query;
+   if(search){
+  fetch(`http://localhost:3001/projects?q=${search}`)
+  .then((res)=>res.json())
+  .then((data)=>{
+    setdata(data)
+  });
+    return (
+      <div>
+    {data.map(({id,name})=>{
+      return(
+<Project key={id} id={id} name={name} />
+      )
+      })}
+      </div>)
+  }
+
   return (
     <>
    <Head>
@@ -24,11 +42,7 @@ export default function Home({projects}) {
 }
 
 export const  getStaticProps=async()=> {
-  import {search } from './search'
   const base_url = `http://localhost:3001/projects?q=`;
-
-  if(search)
-     base_url+search;
 
   const res = await fetch(`${base_url}`);
   const data = await res.json()
