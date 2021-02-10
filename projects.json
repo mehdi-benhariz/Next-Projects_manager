@@ -3,27 +3,29 @@
     {
       "id": "1",
       "name": "todo app",
-      "type": "None"
+      "type": "None",
+      "stacks":["react","django"]
     },
     {
       "id": "2",
       "name": "chat app",
-      "type": "Glazed"
+      "type": "Glazed",
+      "stacks":["react","node","soket.io"]
+
     },
     {
       "id": "3",
       "name": "space invader",
-      "type": "Chocolate"
+      "type": "Chocolate",
+      "stacks":["python"]
+
     },
     {
       "id": "4",
       "name": "meme generator",
-      "type": "Maple"
-    },
-    {
-      "id": "8",
-      "name": "meme generator",
-      "type": "Maple"
+      "type": "Maple",
+      "stacks":["react"]
+
     }
   ]
 }
