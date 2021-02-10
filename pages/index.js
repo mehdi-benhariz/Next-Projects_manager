@@ -8,15 +8,15 @@ const [data, setdata] = useState([]);
 
   const router = useRouter()
   const {search}= router.query;
- console.log(search)
+
   if(search){
   fetch(`http://localhost:3001/projects?q=${search}`)
   .then((res)=>res.json())
   .then((data)=>{
     setdata(data)
   });
-  console.log({data})
-    return (
+
+  return (
       <div>
     {data.map((p)=>{
       return(

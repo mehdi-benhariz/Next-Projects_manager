@@ -35,9 +35,9 @@ const NavBar = () => {
             focus:border-transparent  shadow appearance-none  rounded w-2/3 mr-2 text-grey-darker"/>
   <button class="bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 
     text-white  rounded font-meduim p-1 text-xl"
-    onClick={()=>  {
-        console.log({search})
-        router.push({
+    onClick={(e)=>  {
+e.preventDefault()
+  router.push({
     pathname: '/',
     query: { search: search }
 }) 
