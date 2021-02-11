@@ -3,17 +3,24 @@ import Image from 'next/image'
 import {useRouter} from "next/router";
 import { useState } from 'react';
 
-const NavBar = () => {
+const NavBar = ({pid}) => {
     const [search, setsearch] = useState("");
     const router = useRouter();
-
+   const [sorted, setsorted] = useState(false)
     //getting the search result 
     return (
         <nav class="grid sm:grid-cols-3 sm:h-full px-2 " >
             <div className="logo">
                 <Image src="/projects.jpg" width={128} height={77}  />
             <h1 class=" text-xl text-blue-600 font-medium hover:bg-blue-600 hover:text-white
-            p-2 rounded transition ease-linear duration-500" >Projects</h1>
+            p-2 rounded transition ease-linear duration-500" 
+            onClick={(e)=>{
+               e.preventDefault();
+          
+            }
+
+            }
+            >Projects</h1>
             </div>
             <div class="left-0 " >
             <Link href="/"><a
@@ -24,7 +31,12 @@ const NavBar = () => {
             class="inline-block border-b-4 hover:border-blue-500 text-xl font-medium 
             transition ease-linear duration-300 " 
             >About</a></Link>
-            <Link href="/create" ><a
+            <Link href="/create" to ={{
+              pathname: "/create", 
+              state: { 
+                  pid:pid
+              }
+             }}><a
             class="inline-block border-b-4 rounded-sm hover:border-blue-500 text-xl font-medium 
             transition ease-linear duration-300 " 
             >Add</a></Link>
@@ -53,3 +65,12 @@ Find  </button>
 }
  
 export default NavBar;
+export const  getStaticProps=async()=> {
+  const base_url = `http://localhost:3001/projects`;
+
+  const res = await fetch(`${base_url}`);
+  const data = await res.json()
+  return {
+    props: {pid:data.length()}, 
+  }
+}

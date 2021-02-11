@@ -4,13 +4,16 @@ import {useRouter} from "next/router"
 import { useState } from 'react'
 
 export default  function Home({projects}) {
-const [data, setdata] = useState([]);
+var baseUrl = "http://localhost:3001/projects"
+  const [data, setdata] = useState([]);
 
   const router = useRouter()
-  const {search}= router.query;
+  const {search,tag}= router.query;
 
-  if(search){
-  fetch(`http://localhost:3001/projects?q=${search}`)
+  if(search || tag){
+    const suffix =search?('q='+search):('stacks_like='+tag)
+   console.log(suffix)
+  fetch(`${baseUrl}?${suffix}`)
   .then((res)=>res.json())
   .then((data)=>{
     setdata(data)

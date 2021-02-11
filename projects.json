@@ -4,28 +4,47 @@
       "id": "1",
       "name": "todo app",
       "type": "None",
-      "stacks":["react","django"]
+      "stacks": [
+        "react",
+        "django"
+      ]
     },
     {
       "id": "2",
       "name": "chat app",
       "type": "Glazed",
-      "stacks":["react","node","soket.io"]
-
+      "stacks": [
+        "react",
+        "node",
+        "soket.io"
+      ]
     },
     {
       "id": "3",
       "name": "space invader",
       "type": "Chocolate",
-      "stacks":["python"]
-
+      "stacks": [
+        "python"
+      ]
     },
     {
       "id": "4",
       "name": "meme generator",
       "type": "Maple",
-      "stacks":["react"]
-
+      "stacks": [
+        "react"
+      ]
+    },
+    {
+      "name": "test",
+      "url": "test",
+      "description": "test",
+      "year": "test",
+      "stacks": [
+        "one",
+        "two"
+      ],
+      "id": "2mwqNOo"
     }
   ]
 }

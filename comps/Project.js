@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Project = ({project}) => {
-
+    const router = useRouter();
     const {name,id,stacks} = project;
 
     return (  
@@ -16,7 +17,15 @@ const Project = ({project}) => {
                {stacks.map((s,i)=>{
                    return (
                     <span key={i} class="m-1 bg-gray-200 hover:bg-gray-300 rounded-full px-2 font-bold
-                    text-sm leading-loose cursor-pointer" >{s} </span>
+                    text-sm leading-loose cursor-pointer"
+                    onClick={(e)=>{
+                       e.preventDefault();
+                        router.push({
+                            pathname:'/',
+                            query:{tag:s}
+                        })
+                    }}
+                    >{s} </span>
                    )
                })}
            
@@ -33,5 +42,5 @@ export default Project;
 
 const handleDelete=async(id)=>{
     await fetch('http://localhost:3001/projects/'+id,{method:'DELETE'})
-    
+       
  }
