@@ -2,7 +2,7 @@ import {useRouter} from "next/router"
 
 const Detail = ({ project }) => {
   const { name, id, stacks, description, year, url } = project;
-
+   console.log({id})
    const router = useRouter()
 
    return (
@@ -50,9 +50,9 @@ const Detail = ({ project }) => {
       <button
         onClick={(e) =>{
               e.preventDefault()
-               router.replace({
-                   pahtname:"/edit",
-                   query:{pid:id}
+               router.push({
+                   pahtname:"/edit/",
+                   query:{id:parseInt( id)}
                })
         }}
         class="p-2 hover:bg-yellow-500 border-2 border-yellow-500 hover:text-white

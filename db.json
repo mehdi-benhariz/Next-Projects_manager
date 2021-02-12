@@ -36,6 +36,7 @@
       ]
     },
     {
+      "id": "5",
       "name": "test",
       "url": "test",
       "description": "test",
@@ -43,8 +44,19 @@
       "stacks": [
         "one",
         "two"
-      ],
-      "id": "2mwqNOo"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "test",
+      "password": "also test"
+    },
+    {
+      "username": "mehdi",
+      "password": "1234",
+      "id": "yE4re2z"
     }
   ]
 }

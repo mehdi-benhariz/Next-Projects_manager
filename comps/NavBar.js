@@ -4,7 +4,8 @@ import {useRouter} from "next/router";
 import { useState } from 'react';
 
 const NavBar = ({pid}) => {
-    const [search, setsearch] = useState("");
+console.log({pid})
+  const [search, setsearch] = useState("");
     const router = useRouter();
    const [sorted, setsorted] = useState(false)
     //getting the search result 
@@ -33,7 +34,7 @@ const NavBar = ({pid}) => {
             >About</a></Link>
             <Link href="/create" to ={{
               pathname: "/create", 
-              state: { 
+              query: { 
                   pid:pid
               }
              }}><a
@@ -70,6 +71,7 @@ export const  getStaticProps=async()=> {
 
   const res = await fetch(`${base_url}`);
   const data = await res.json()
+  console.log({data})
   return {
     props: {pid:data.length()}, 
   }

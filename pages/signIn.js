@@ -1,12 +1,12 @@
 import { useState } from "react";
-import {hash} from "bcrypt";
+// import {hash} from "bcrypt";
 
 const SignIn = () => {
   const [user, setuser] = useState({ username: "", password: "" });
 
-  hash(myPlaintextPassword, saltRounds, function (err, hash) {
-    // Store hash in your password DB.
-  });
+  // hash(myPlaintextPassword, saltRounds, function (err, hash) {
+  //   // Store hash in your password DB.
+  // });
   return (
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
       <div class="mb-4">
@@ -40,8 +40,12 @@ const SignIn = () => {
       </div>
       <div class="flex items-center justify-between">
         <button
-          class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+          class="bg-blue hover:bg-blue-200 text-blue-500 font-bold py-2 px-4 rounded"
           type="button"
+          onClick={(e)=>{
+            e.preventDefault()
+
+          }}
         >
           Sign In
         </button>
@@ -57,3 +61,13 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+const checkUser=async(user,pwd)=>{
+  const res =await fetch(`http://localhost:3001/users?username=${user}`)
+  const data  =await res.json()
+  if(data =={})
+    return "doesn't exist";
+  if(pwd != data[0].password)
+    return "password incorrect!";
+  return true;
+}

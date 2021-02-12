@@ -1,29 +1,13 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 
-const Create = () => {
-  const router= useRouter()
-  const {pid} = router.query
-  console.log(router)
-    var [project, setproject] = useState({
-      name:"",
-      url:"",
-      description:"",
-      year:null,
-      stacks:new Set()
-  });
-  const techs = ["react", "django", "tailwind", "node", "flutter"];
-  var [error, seterror] = useState("")
+const Edit = () => {
+   const router= useRouter()
+   const {pid} = router.query
+    
 
-  const handleSubmit=()=>{
-      fetch('http://localhost:3001/projects',{method:"POST",body:project})
-      .then((res)=>res.json())
-      .then(x=>console.log(x))
-      .catch(err=>seterror(err))
-  }
 
-  return (
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+    return ( 
+<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
       <div class="-mx-3 md:flex mb-6">
         <div class="md:w-1/2 px-3 mb-6 md:mb-0">
           <label
@@ -63,7 +47,7 @@ const Create = () => {
       </div>
       <div class="-mx-3 md:flex mb-6">
       <div class='my-3 flex flex-wrap -m-1'>
-      {[...project.stacks].map((s, i) => {
+      {project.stacks.map((s, i) => {
           return (
             <span
               key={i}
@@ -71,7 +55,7 @@ const Create = () => {
                     text-sm leading-loose cursor-pointer"
               onClick={(e)=>{
                   e.preventDefault()
-                setproject( {...project,stacks:new Set(project.stacks).delete(s)})
+                setproject( {...project,stacks:project.stacks.splice(i,1)})
 
             }}
             >
@@ -133,7 +117,7 @@ const Create = () => {
             <select
               class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
               id="grid-state"
-              onChange={(e)=>setproject({ ...project, stacks:new Set(project.stacks).add(e.target.value) })}
+              onChange={(e)=>setproject({ ...project, stacks: [...project.stacks,e.target.value] })}
             >
               {techs.map((t) => {
                 return (
@@ -161,16 +145,36 @@ const Create = () => {
             onClick={(e) => {
               e.preventDefault();
               console.log({ project });
-              handleSubmit();
             }}
           >
-            Add{" "}
+            Edit{" "}
           </button>
         </div>
       </div>
-      {error &&<p class="text-base text-red-600 font-light " >error</p>}
-    </div>
-  );
-};
+    </div>     );
+}
+ 
+export default Edit;
+export async function getStaticPaths() {
+  const res = await fetch("http://localhost:3001/projects");
+  const data = await res.json();
+  const id = context.params.id;
 
-export default Create;
+  const paths = data.map(({ id }) => {
+    return {
+      params: { id: id.toString() },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+const handleUpdate = async (id, newP) => {
+    await fetch("http://localhost:3001/projects/" + id, {
+      method: "DELETE",
+      body: newP,
+    });
+  };

@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev ",
     "build": "next build",
     "start": "next start",
-    "json:server": "json-server --watch projects.json"
+    "json:server": "json-server --watch db.json"
   },
   "dependencies": {
     "autoprefixer": "^10.2.4",
